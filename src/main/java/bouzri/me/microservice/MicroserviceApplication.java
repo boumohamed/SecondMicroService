@@ -18,7 +18,7 @@ public class MicroserviceApplication {
         SpringApplication.run(MicroserviceApplication.class, args);
     }
 
-    // Part 2 : 01:00
+    // Part 2 : 01:20
     @Bean
     CommandLineRunner start(BankAccountrepository br)
     {

@@ -1,20 +1,22 @@
 package bouzri.me.microservice.web;
 
 import bouzri.me.microservice.Entities.Account;
+import bouzri.me.microservice.dtos.AccountRequestDTO;
+import bouzri.me.microservice.dtos.AccountResponseDTO;
 import bouzri.me.microservice.repositories.BankAccountrepository;
+import bouzri.me.microservice.service.AccountService;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-
-import javax.websocket.server.PathParam;
 import java.util.Date;
 import java.util.List;
-import java.util.UUID;
+
 
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api")
 public class AccountRestController {
     private BankAccountrepository bar;
+    private AccountService accountService;
 
     @GetMapping("/accounts")
     public List<Account> getAccounts()
@@ -30,11 +32,9 @@ public class AccountRestController {
     }
 
     @PostMapping("/accounts")
-    public Account save(@RequestBody Account account)
+    public AccountResponseDTO save(@RequestBody AccountRequestDTO accountSTO)
     {
-        if (account.getId() == null) account.setId(UUID.randomUUID().toString());
-        if (account.getCreated() == null) account.setCreated(new Date());
-        return bar.save(account);
+        return accountService.AddAccount(accountSTO);
     }
     @PutMapping("/accounts/{id}")
     public Account update(@RequestBody Account account, @PathVariable String id)
