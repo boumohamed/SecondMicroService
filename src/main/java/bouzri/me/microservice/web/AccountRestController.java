@@ -19,16 +19,15 @@ public class AccountRestController {
     private AccountService accountService;
 
     @GetMapping("/accounts")
-    public List<Account> getAccounts()
+    public List<AccountResponseDTO> getAccounts()
     {
-        return bar.findAll();
+        return accountService.getAccounts();
     }
 
     @GetMapping("/accounts/{id}")
-    public Account getAccount(@PathVariable() String id)
+    public AccountResponseDTO getAccount(@PathVariable() String id)
     {
-        return bar.findById(id)
-                .orElseThrow(() -> new RuntimeException(String.format("Account %s Not Found", id)));
+        return accountService.getAccount(id);
     }
 
     @PostMapping("/accounts")
@@ -37,14 +36,9 @@ public class AccountRestController {
         return accountService.AddAccount(accountSTO);
     }
     @PutMapping("/accounts/{id}")
-    public Account update(@RequestBody Account account, @PathVariable String id)
+    public AccountResponseDTO update(@RequestBody AccountRequestDTO accountRequestDTO, @PathVariable String id)
     {
-        Account acc = bar.findById(id).orElseThrow();
-        if (account.getBalance() != null) acc.setBalance(account.getBalance());
-        if (account.getCurrency() != null) acc.setCurrency(account.getCurrency());
-        if (account.getCreated() != null) acc.setCreated(new Date());
-        if (account.getType() != null) acc.setType(account.getType());
-        return bar.save(acc);
+        return accountService.update(accountRequestDTO, id);
     }
 
     @DeleteMapping("/accounts/{id}")
