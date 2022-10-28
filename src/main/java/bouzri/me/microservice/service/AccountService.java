@@ -11,4 +11,6 @@ public interface AccountService {
     public List<AccountResponseDTO> getAccounts();
     public AccountResponseDTO getAccount(String id);
     public AccountResponseDTO update(AccountRequestDTO accountRequestDTO, String id);
+
+    boolean deleteAccount(String id);
 }

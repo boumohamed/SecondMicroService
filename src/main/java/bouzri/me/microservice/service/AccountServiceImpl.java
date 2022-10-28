@@ -9,9 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -48,7 +46,7 @@ public class AccountServiceImpl implements AccountService {
     @Override
     public AccountResponseDTO update(AccountRequestDTO accountRequestDTO, String id) {
         Account acc = bar.findById(id).orElseThrow();
-
+        acc.setId(id);
         if (accountRequestDTO.getBalance() != null) acc.setBalance(accountRequestDTO.getBalance());
         if (accountRequestDTO.getCurrency() != null) acc.setCurrency(accountRequestDTO.getCurrency());
         if (accountRequestDTO.getType() != null) acc.setType(accountRequestDTO.getType());
@@ -56,4 +54,15 @@ public class AccountServiceImpl implements AccountService {
         return mapper.fromAccount(saved);
 
     }
+
+    @Override
+    public boolean deleteAccount(String id) {
+        Account account = bar.findById(id).orElseThrow(() -> new RuntimeException(String.format("Account \' %s \' not found", id)));
+        if (account == null)
+            return false;
+        bar.deleteById(id);
+        return true;
+
+    }
+
 }
