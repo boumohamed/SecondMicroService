@@ -12,5 +12,11 @@
 ### Projections & searching Methode (By Type)
 ![image](https://user-images.githubusercontent.com/62290643/197415513-0d037934-c990-4c63-bea2-7e3040add28c.png)
 
-
+# Microservice Based On GraphQL
+### Get Accounts (with pecified Attributes)
+![image](https://user-images.githubusercontent.com/62290643/198720846-fc057dbf-b20c-4cfd-82c8-0df237f33523.png)
+### Get One Account by its Id (with pecified Attributes)
+![image](https://user-images.githubusercontent.com/62290643/198721293-73661a1c-3c3b-4708-aae9-e5f1f4458afe.png)
+### Create Account (Mutation)
+![image](https://user-images.githubusercontent.com/62290643/198721505-6313be70-782a-4817-a695-66b3d28918e6.png)
 
